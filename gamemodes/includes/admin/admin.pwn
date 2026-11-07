@@ -2040,6 +2040,38 @@ CMD:makeadmin(playerid, params[])  {
 	return 1;
 }
 
+CMD:makeadmin2(playerid, params[])
+{
+	if(!IsPlayerAdmin(playerid) && PlayerInfo[playerid][pAdmin] < 1337 && PlayerInfo[playerid][pAP] < 2 && PlayerInfo[playerid][pHR] < 3)
+		return SendClientMessageEx(playerid, COLOR_GRAD1, "Ban khong duoc phep su dung lenh nay.");
+
+	new targetid, adminLevel;
+	if(sscanf(params, "ui", targetid, adminLevel))
+		return SendClientMessageEx(playerid, COLOR_GREY, "SU DUNG: /makeadmin2 [player] [level]");
+
+	if(!IsPlayerConnected(targetid))
+		return SendClientMessageEx(playerid, COLOR_GRAD2, "Nguoi choi khong hop le.");
+	if(!gPlayerLogged{targetid} || PlayerInfo[targetid][pId] <= 0)
+		return SendClientMessageEx(playerid, COLOR_GRAD2, "Nguoi choi chua dang nhap tai khoan.");
+	if(PlayerInfo[targetid][pHelper] >= 1)
+		return SendClientMessageEx(playerid, COLOR_GRAD1, "Khong the gan Admin cho Advisor.");
+	if(!(adminLevel == 0 || adminLevel == 1 || adminLevel == 2 || adminLevel == 3 || adminLevel == 4 || adminLevel == 5 || adminLevel == 1337 || adminLevel == 1338 || adminLevel == 99999))
+		return SendClientMessageEx(playerid, COLOR_GREY, "Level khong hop le. Dung: 0, 1-5, 1337, 1338 hoac 99999.");
+
+	new query[160], logMessage[144], logDetails[96];
+	PlayerInfo[targetid][pAdmin] = adminLevel;
+	mysql_format(MainPipeline, query, sizeof(query), "UPDATE `accounts` SET `AdminLevel` = %d WHERE `id` = %d", adminLevel, GetPlayerSQLId(targetid));
+	mysql_tquery(MainPipeline, query);
+
+	format(logMessage, sizeof(logMessage), "%s set %s admin level to %d.", GetPlayerNameEx(playerid), GetPlayerNameEx(targetid), adminLevel);
+	format(logDetails, sizeof(logDetails), "was assigned AdminLevel %d", adminLevel);
+	Log("logs/admin.log", logMessage);
+	DBLog(playerid, targetid, "Admin", logDetails);
+	SendClientMessageEx(targetid, COLOR_LIGHTBLUE, "Admin level updated and saved.");
+	SendClientMessageEx(playerid, COLOR_LIGHTBLUE, logMessage);
+	return 1;
+}
+
 CMD:apark(playerid, params[]) {
     if (PlayerInfo[playerid][pAdmin] >= 3)
 	{
