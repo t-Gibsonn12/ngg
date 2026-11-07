@@ -196,7 +196,7 @@ stock SafeLogin(playerid, type)
 				}
 				else
 				{
-				    ShowMainMenuDialog(playerid, 5);
+				    ShowMainMenuDialog(playerid, 2);
 				}
 			}
 			else
