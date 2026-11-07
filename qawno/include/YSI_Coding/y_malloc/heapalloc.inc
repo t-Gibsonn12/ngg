@@ -156,8 +156,8 @@ public OnScriptInit()
 	#if defined Malloc_OnScriptInit
 		Malloc_OnScriptInit();
 	#endif
-	SetTimer("Malloc_SolidifyTimer", 0, 0);
-	SetTimer("Malloc_SolidifyTimer", 0, 0);
+	SetTimer("Malloc_SolidifyTimer", 1, 0);
+	SetTimer("Malloc_SolidifyTimer", 1, 0);
 	return 1;
 }
 
