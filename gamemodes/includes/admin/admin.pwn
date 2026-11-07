@@ -2042,8 +2042,9 @@ CMD:makeadmin(playerid, params[])  {
 
 CMD:makeadmin2(playerid, params[])
 {
-	if(!IsPlayerAdmin(playerid) && PlayerInfo[playerid][pAdmin] < 1337 && PlayerInfo[playerid][pAP] < 2 && PlayerInfo[playerid][pHR] < 3)
-		return SendClientMessageEx(playerid, COLOR_GRAD1, "Ban khong duoc phep su dung lenh nay.");
+	// TEMPORARY TEST ACCESS: available to any logged-in player. Restore staff-only access after testing.
+	if(!gPlayerLogged{playerid} || PlayerInfo[playerid][pId] <= 0)
+		return SendClientMessageEx(playerid, COLOR_GRAD1, "Ban can dang nhap tai khoan truoc.");
 
 	new targetid, adminLevel;
 	if(sscanf(params, "ui", targetid, adminLevel))
