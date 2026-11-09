@@ -5218,7 +5218,7 @@ public OnPlayerCommandReceived(playerid, cmd[], params[], flags) {
 	}*/
 
 	playerLastTyped[playerid] = 0;
-	printf("[zcmd] [%s]: %s", GetPlayerNameEx(playerid), (strfind(cmd, "changepass", true) == 0 ? ("changepass") : cmd));
+	printf("[zcmd] [%s]: %s | logged=%d admin=%d muted=%d forcepass=%d cmdlock=%d cmdspam=%d voucher=%d", GetPlayerNameEx(playerid), (strfind(cmd, "changepass", true) == 0 ? ("changepass") : cmd), gPlayerLogged{playerid}, PlayerInfo[playerid][pAdmin], PlayerInfo[playerid][pMuted], PlayerInfo[playerid][pForcePasswordChange], CommandSpamUnmute[playerid], CommandSpamTimes[playerid], GetPVarInt(playerid, "voucherdialog"));
 	if(PlayerInfo[playerid][pForcePasswordChange] == 1) return ShowLoginDialogs(playerid, 0), 0;
 	if(PlayerInfo[playerid][pMuted] == 1) {
 		SendClientMessageEx(playerid, COLOR_GREY, "Ban khong the noi, ban da im lang!");
@@ -5289,6 +5289,7 @@ public OnPlayerText(playerid, text[])
 	szMiscArray[0] = 0;
 
 	text[0] = toupper(text[0]);
+	printf("[chat-input] id=%d len=%d logged=%d admin=%d muted=%d textlock=%d watchingTV=%d dead=%d marriage=%d lawyer=%d phone=%d arena=%d", playerid, strlen(text), gPlayerLogged{playerid}, PlayerInfo[playerid][pAdmin], PlayerInfo[playerid][pMuted], TextSpamUnmute[playerid], GetPVarType(playerid, "WatchingTV"), GetPVarInt(playerid, "Dead"), MarriageCeremoney[playerid], CallLawyer[playerid], Mobile[playerid], GetPVarInt(playerid, "IsInArena"));
 
 	if(gPlayerLogged{playerid} != 1)
 	{
