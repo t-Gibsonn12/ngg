@@ -4955,7 +4955,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	    }
 		GetVehicleParamsEx(newcar,engine,lights,alarm,doors,bonnet,boot,objective);
 		if((engine == VEHICLE_PARAMS_UNSET || engine == VEHICLE_PARAMS_OFF) && GetVehicleModel(newcar) != 509 && GetVehicleModel(newcar) != 481 && GetVehicleModel(newcar) != 510 && (DynVeh[newcar] != -1 && GetVehicleModel(newcar) == 592 && DynVehicleInfo[DynVeh[newcar]][gv_iType] != 1) ) {
-			SendClientMessageEx(playerid, COLOR_WHITE, "Dong co phuong tien nay khong chay - Neu ban muon khoi dong no, nhan ~k~~CONVERSATION_YES~.");
+			SendClientMessageEx(playerid, COLOR_WHITE, "Dong co phuong tien nay khong chay - Neu ban muon khoi dong no, nhan Y hoac N.");
 		}
 		else if((engine == VEHICLE_PARAMS_UNSET || engine == VEHICLE_PARAMS_OFF) && (DynVeh[newcar] != -1 && GetVehicleModel(newcar) == 592 && DynVehicleInfo[DynVeh[newcar]][gv_iType] == 1))
 		{
